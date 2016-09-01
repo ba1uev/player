@@ -5,6 +5,7 @@ import { stopAllOther, addToPlayedStore } from '../utils/audioStore.js';
 import PlayButton from './PlayButton';
 import Timer from './Timer';
 import Progress from './Progress';
+import Info from './Info';
 
 class Player extends Component {
 
@@ -122,6 +123,12 @@ class Player extends Component {
     return (
       <div style={style.container}>
         <PlayButton
+          soundCloudAudio={this.soundCloudAudio}
+          {...this.props}
+          {...this.state}
+        />
+
+        <Info
           soundCloudAudio={this.soundCloudAudio}
           {...this.props}
           {...this.state}
