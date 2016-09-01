@@ -26,14 +26,14 @@ class Progress extends Component {
 
     let style = {
       height: '10px',
-      backgroundColor: '#eee'
+      backgroundColor: '#eee',
+      cursor: 'pointer'
     }
     let innerStyle = {
       height: '100%',
       backgroundColor: '#bdbdbd',
-      width: `${value}%`
+      width: `${value !== undefined ? value : 0}%`
     }
-
     return (
       <div style={style} onClick={::this.handleSeekTrack}>
         <div style={innerStyle} />

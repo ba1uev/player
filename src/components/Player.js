@@ -24,17 +24,18 @@ class Player extends Component {
       console.log('change track');
       this.soundCloudAudio.pause();
       this.requestAudio(props.resolveUrl);
-      setTimeout(() => {
-        this.soundCloudAudio.play();
-      }, 300)
+      // setTimeout(() => {
+      //   this.soundCloudAudio.play();
+      // }, 1000)
     }
+    // if (props.)
   }
 
   componentDidMount() {
-    console.log('mount');
     this.mounted = true;
     this.requestAudio();
     this.listenAudioEvents();
+    this.props.done(this.soundCloudAudio);
   }
 
   componentWillUnmount() {
@@ -42,9 +43,10 @@ class Player extends Component {
     this.soundCloudAudio.unbindAll();
   }
 
+
   requestAudio(url) {
     const { soundCloudAudio } = this;
-    const { streamUrl } = this.props;
+    const { streamUrl, onResponceAudio } = this.props;
     let resolveUrl = url || this.props.resolveUrl;
     if (streamUrl) {
       soundCloudAudio.preload(streamUrl);
@@ -55,7 +57,8 @@ class Player extends Component {
         }
         this.setState({
           [data.tracks ? 'playlist' : 'track']: data
-        });
+        }, onResponceAudio && onResponceAudio(this.soundCloudAudio));
+        console.log('setstate new track');
       });
     }
   }
@@ -99,6 +102,7 @@ class Player extends Component {
     const { onStopTrack } = this.props;
     this.setState({playing: false});
     onStopTrack && onStopTrack(this.soundCloudAudio);
+
   }
 
   getCurrentTime() {
@@ -114,8 +118,9 @@ class Player extends Component {
   }
 
   render() {
+    let {style} = this.props;
     return (
-      <div>
+      <div style={style.container}>
         <PlayButton
           soundCloudAudio={this.soundCloudAudio}
           {...this.props}

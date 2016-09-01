@@ -31,8 +31,8 @@ class PlayButton extends Component {
       iconNode = '▶';
     }
     return (
-      <div>
-        <button onClick={::this.handleClick}>{iconNode}</button>
+      <div style={style.playButton} onClick={::this.handleClick}>
+        {iconNode}
       </div>
     )
   }

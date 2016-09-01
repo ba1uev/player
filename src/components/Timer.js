@@ -17,17 +17,13 @@ class Timer extends Component {
   }
 
   render() {
-    const { currentTime, soundCloudAudio } = this.props;
+    const { currentTime, soundCloudAudio, style } = this.props;
     let { duration } = this.props;
     if (!duration && soundCloudAudio && soundCloudAudio.duration) {
       duration = soundCloudAudio.duration;
     }
-    let timerStyle = {
-      padding: '4px 8px',
-      backgroundColor: 'pink',
-    }
     return (
-      <div style={timerStyle}>
+      <div style={style.timer}>
         {Timer.calcTime(currentTime)} / {Timer.calcTime(duration)}
       </div>
     );
